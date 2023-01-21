@@ -1,0 +1,15 @@
+.full-width {
+  width: 100%;
+}
+
+.btn-container-left {
+  display: flex;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.btn-container-right {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}

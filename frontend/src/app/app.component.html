@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <mat-icon class="icon">restaurant</mat-icon>
+  <button mat-button (click)="showList()">MEALS</button>
+  <button mat-button (click)="addNew()">ADD NEW</button>
+</mat-toolbar>
+<div *ngIf="displayForm">
+  <div class="container">
+    <app-meal-add
+      [inputMeal]="inputMeal"
+      (add)="addMeal($event)"
+    ></app-meal-add>
+  </div>
+</div>
+<div *ngIf="displayList">
+  <div class="container">
+    <div *ngIf="meals$ | async as meals">
+      <app-meal-list
+        *ngIf="meals.length > 0; else nodata"
+        [meals]="meals"
+        (stockChange)="updateMeal($event)"
+        (copy)="copyExisting($event)"
+        (delete)="deleteMeal($event)"
+      ></app-meal-list>
+    </div>
+  </div>
+  <ng-template #nodata> Could not fetch data from the server. </ng-template>
+</div>

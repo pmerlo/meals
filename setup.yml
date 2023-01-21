@@ -1,0 +1,51 @@
+---
+- name: Test Playbook
+  hosts: all
+  gather_facts: false
+  remote_user: ansibler
+
+  pre_tasks:
+    - name: Set LED trigger
+      command: sudo sh -c "echo timer > /sys/class/leds/led1/trigger"
+
+  tasks:
+    - name: Delete user "runner"
+      ansible.builtin.user:
+        user: "runner"
+        state: "absent"
+        remove: true
+      become: true
+
+    - name: Genenerate deploy keys for backend
+      openssh_keypair:
+        owner: ansibler
+        group: ansibler
+        mode: 0600
+        path: "/home/ansibler/.ssh/id_rsa_meals"
+        type: rsa
+        size: 4096
+        comment: "ansibler@backend"
+      register: key_backend
+
+    - name: Genenerate deploy key for frontend
+      openssh_keypair:
+        owner: ansibler
+        group: ansibler
+        mode: 0600
+        path: "/home/ansibler/.ssh/id_rsa_meals_dist"
+        type: rsa
+        size: 4096
+        comment: "ansibler@frontend"
+      register: key_frontend
+
+    - name: Print deploy key for backend
+      debug:
+        var: key_backend.public_key
+
+    - name: Print deploy key for frontend
+      debug:
+        var: key_frontend.public_key
+
+  post_tasks:
+    - name: Restore LED trigger
+      command: sudo sh -c "echo heartbeat > /sys/class/leds/led1/trigger"

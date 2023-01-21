@@ -1,0 +1,34 @@
+<div class="buttons">
+  <button mat-button (click)="historyVisible ? hideHistory() : showHistory()">
+    <mat-icon>{{ historyVisible ? "visibility" : "visibility_off" }}</mat-icon>
+    HISTORY
+  </button>
+
+  <button mat-button class="btn" (click)="changeSort()">
+    <mat-icon>{{ dateAscending ? "arrow_upward" : "arrow_downward" }}</mat-icon>
+    DATE
+  </button>
+</div>
+
+<div *ngIf="visibleMeals.length > 0; else nodata">
+  <div class="flex-container">
+    <div
+      *ngFor="let meal of visibleMeals; let i = index"
+      [ngClass]="i % 2 === 0 ? 'flex-item-left' : 'flex-item-right'"
+    >
+      <app-meal-card
+        [meal]="meal"
+        (stockChange)="updateMeal($event)"
+        (copy)="copyMeal($event)"
+        (delete)="deleteMeal($event)"
+      ></app-meal-card>
+    </div>
+    <div *ngIf="visibleMeals.length % 2 !== 0" class="flex-item-right"></div>
+  </div>
+</div>
+
+<ng-template #nodata>
+  No data available.
+  <br />
+  Try displaying the history.
+</ng-template>

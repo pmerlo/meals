@@ -1,0 +1,32 @@
+<mat-card [style]="'background-color: ' + getColor()">
+  <mat-card-header>
+    <mat-card-title>{{ meal.name | titlecase }}</mat-card-title>
+    <mat-card-subtitle>{{ meal.date | date }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Stock: {{ meal.stock }} / {{ meal.portions }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-icon-button
+      [disabled]="meal.stock === 0"
+      (click)="decreaseStock()"
+    >
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="meal.stock === meal.portions"
+      (click)="increaseStock()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+    <button mat-icon-button (click)="copyMeal()">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+    <button mat-icon-button (click)="deleteMeal()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

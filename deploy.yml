@@ -1,0 +1,39 @@
+---
+- name: Test Playbook
+  hosts: all
+  gather_facts: false
+  remote_user: ansibler
+
+  pre_tasks:
+    - name: Set LED trigger
+      command: sudo sh -c "echo timer > /sys/class/leds/led1/trigger"
+
+  tasks:
+    # - name: Stop services
+    #   ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml stop
+
+    # - name: Clone this repo
+    #   ansible.builtin.git:
+    #     repo: git@github.com:pmerlo/meals.git
+    #     dest: /home/ansibler/meals
+    #     key_file: /home/ansibler/.ssh/id_rsa_meals
+    #     accept_hostkey: yes
+    #     force: yes
+
+    # - name: Clone frontend dist repo
+    #   ansible.builtin.git:
+    #     repo: git@github.com:pmerlo/meals-dist.git
+    #     dest: /home/ansibler/meals/frontend-dist
+    #     key_file: /home/ansibler/.ssh/id_rsa_meals_dist
+    #     accept_hostkey: yes
+    #     force: yes
+
+    - name: Build containers
+      ansible.builtin.shell: sudo docker compose --file /home/ansibler/meals/docker-compose.yml build
+
+    - name: Launch services
+      ansible.builtin.shell: sudo docker compose --file /home/ansibler/meals/docker-compose.yml up --detach
+
+  post_tasks:
+    - name: Restore LED trigger
+      command: sudo sh -c "echo heartbeat > /sys/class/leds/led1/trigger"
