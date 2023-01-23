@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MealsService } from './services';
 import { Meal } from './models';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environment';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   inputMeal: Partial<Meal> = {};
   displayList = true;
   displayForm = false;
-  
+
   constructor(private mealsService: MealsService) {}
 
   ngOnInit(): void {
@@ -57,5 +58,9 @@ export class AppComponent implements OnInit {
     this.mealsService.delete(meal._id).subscribe(() => {
       this.ngOnInit();
     });
+  }
+
+  versionHash(): string {
+    return environment.appVersion;
   }
 }

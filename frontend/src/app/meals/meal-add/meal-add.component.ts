@@ -61,9 +61,7 @@ export class MealAddComponent implements OnInit {
       date: this.dateFormControl.value,
       ...this.mealForm.value,
     };
-    // console.log(JSON.stringify(data));
     this.add.emit(data);
-    this.onReset();
   }
 
   onReset(): void {

@@ -7,7 +7,7 @@ rm -rf $DIST/frontend
 cd frontend/
 npm install
 npm run clean
-npm run build-prod
+npm run dist
 cp -r dist/frontend/ ../$DIST/frontend
 
 cd ../$DIST/

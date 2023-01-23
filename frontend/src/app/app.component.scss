@@ -9,6 +9,15 @@
   margin-right: 10px;
 }
 
+.spacer {
+  flex: 1 1 auto;
+}
+
 .container {
   padding: 20px 10px;
+}
+
+.version {
+  font-weight: lighter;
+  font-size: small;
 }

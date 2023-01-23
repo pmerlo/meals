@@ -2,6 +2,8 @@
   <mat-icon class="icon">restaurant</mat-icon>
   <button mat-button (click)="showList()">MEALS</button>
   <button mat-button (click)="addNew()">ADD NEW</button>
+  <span class="spacer"></span>
+  <span class="version">{{ versionHash() }}</span>
 </mat-toolbar>
 <div *ngIf="displayForm">
   <div class="container">
