@@ -7,7 +7,7 @@
     "clean": "rm -rf dist/",
     "build": "ng build",
     "build-staging": "ng build --configuration staging",
-    "tag": "echo '$(git rev-parse --short HEAD)' > ./src/version/index.ts",
+    "tag": "node tag.js",
     "build-prod": "ng build --configuration production",
     "dist": "npm run tag && npm run build-prod",
     "watch": "ng build --watch --configuration development",
