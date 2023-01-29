@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Meal } from 'src/app/models';
+import {
+  DialogData,
+  MealDeleteDialogComponent,
+} from '../meal-delete-dialog/meal-delete-dialog.component';
 
 @Component({
   selector: 'app-meal-card',
@@ -11,6 +16,8 @@ export class MealCardComponent {
   @Output() stockChange = new EventEmitter<Meal>();
   @Output() copy = new EventEmitter<Meal>();
   @Output() delete = new EventEmitter<Meal>();
+
+  constructor(public dialog: MatDialog) {}
 
   decreaseStock(): void {
     this.meal.stock = Math.max(0, this.meal.stock - 1);
@@ -27,7 +34,19 @@ export class MealCardComponent {
   }
 
   deleteMeal(): void {
-    this.delete.emit(this.meal);
+    const dialogData: DialogData = {
+      name: this.meal.name,
+      date: this.meal.date,
+    };
+    const dialogRef = this.dialog.open(MealDeleteDialogComponent, {
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.delete.emit(this.meal);
+      }
+    });
   }
 
   getColor(): string {
