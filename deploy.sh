@@ -1,16 +1,21 @@
 DIST=meals-dist
+BUILD=meals-build
 
+echo "Cleaning up..."
 rm -rf $DIST/
+rm -rf $BUILD/
+
 git clone git@github.com:pmerlo/meals-dist.git
 rm -rf $DIST/frontend
 
-cd frontend/
+git clone git@github.com:pmerlo/meals.git $BUILD/
+cd $BUILD/frontend/
 npm install
 npm run clean
 npm run dist
-cp -r dist/frontend/ ../$DIST/frontend
+cp -r dist/frontend/ ../../$DIST/frontend
 
-cd ../$DIST/
+cd ../../$DIST/
 git add .
 git commit -m "build new version"
 git push origin main
