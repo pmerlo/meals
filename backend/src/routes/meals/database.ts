@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
-import { AppResponse, Recipe } from './types';
+import { AppResponse, Meal } from './types';
 
 let mongo: MongoClient;
 
@@ -22,7 +22,7 @@ export function setCollection() {
   return (req: Request, res: Response, next: NextFunction) => {
     res.locals.collection = mongo
       .db(process.env.MONGODB_DB)
-      .collection<Recipe>(process.env.MONGODB_COLLECTION);
+      .collection<Meal>(process.env.MONGODB_COLLECTION);
     next();
   };
 }

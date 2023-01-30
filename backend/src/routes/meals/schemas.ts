@@ -1,4 +1,4 @@
-export const recipeSchema = {
+export const mealSchema = {
   type: 'object',
   required: ['name', 'portions', 'stock', 'date', 'ingredients'],
   properties: {

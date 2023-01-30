@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { Collection } from 'mongodb';
 
-export interface Recipe {
+export interface Meal {
   name: string;
   portions: number;
   stock: number;
@@ -20,7 +20,7 @@ export interface CreateOneResult {
 
 export interface AppResponse extends Response {
   locals: {
-    collection: Collection<Recipe>;
+    collection: Collection<Meal>;
     errorCode?: ClientErrorCode;
   };
 }

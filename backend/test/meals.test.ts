@@ -10,10 +10,10 @@ import { MongoClient, ObjectId } from 'mongodb';
 import request from 'supertest';
 
 import app from '../src/app';
-import { disconnectDb, Recipe } from '../src/routes/recipes';
+import { disconnectDb, Meal } from '../src/routes/meals';
 
 const SEED_ID = '63ba13b16937d34102fe8054';
-const SEED_DATA: Partial<Recipe> = {
+const SEED_DATA: Partial<Meal> = {
   name: 'Mashed potatoes',
   portions: 5,
   stock: 5,
@@ -30,7 +30,7 @@ const MONGODB_URL = 'mongodb://root:password@localhost:27017';
 
 jest.setTimeout(500);
 
-describe('Endpoint recipes', () => {
+describe('Endpoint meals', () => {
   beforeEach((done) => {
     MongoClient.connect(MONGODB_URL).then((client) => {
       const collection = client.db('my_app_test').collection('recipes');
@@ -57,10 +57,10 @@ describe('Endpoint recipes', () => {
     disconnectDb().then(() => done());
   });
 
-  describe('POST /v1/recipes', () => {
+  describe('POST /v1/meals', () => {
     test('valid body returns new item', (done) => {
       request(app)
-        .post('/v1/recipes')
+        .post('/v1/meals')
         .send({ _id: new ObjectId(SEED_ID), ...SEED_DATA })
         .expect('Content-Type', /json/)
         .expect(201)
@@ -76,7 +76,7 @@ describe('Endpoint recipes', () => {
 
     test('invalid body returns error', (done) => {
       request(app)
-        .post('/v1/recipes')
+        .post('/v1/meals')
         .send({ foo: 'bar' })
         .expect('Content-Type', /json/)
         .expect(400)
@@ -88,11 +88,11 @@ describe('Endpoint recipes', () => {
     });
   });
 
-  describe('GET /v1/recipes', () => {
-    test('returns list of recipes', (done) => {
+  describe('GET /v1/meals', () => {
+    test('returns list of meals', (done) => {
       jest.setTimeout(1000);
       request(app)
-        .get('/v1/recipes')
+        .get('/v1/meals')
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -103,10 +103,10 @@ describe('Endpoint recipes', () => {
     });
   });
 
-  describe('GET /v1/recipes/:id', () => {
+  describe('GET /v1/meals/:id', () => {
     test('valid id returns expected item', (done) => {
       request(app)
-        .get(`/v1/recipes/${SEED_ID}`)
+        .get(`/v1/meals/${SEED_ID}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -118,7 +118,7 @@ describe('Endpoint recipes', () => {
 
     test('invalid id returns error', (done) => {
       request(app)
-        .get(`/v1/recipes/0123456789abcdef01234567`)
+        .get(`/v1/meals/0123456789abcdef01234567`)
         .expect('Content-Type', /json/)
         .expect(404)
         .end((err, res) => {
@@ -132,9 +132,9 @@ describe('Endpoint recipes', () => {
     });
   });
 
-  describe('PUT /v1/recipes/:id', () => {
+  describe('PUT /v1/meals/:id', () => {
     test('valid id and body returns updated item', (done) => {
-      const newValue: Recipe = {
+      const newValue: Meal = {
         name: 'Salad',
         portions: 4,
         stock: 4,
@@ -142,7 +142,7 @@ describe('Endpoint recipes', () => {
         ingredients: [{ name: 'Lettuce', qty: '6 oz' }],
       };
       request(app)
-        .put(`/v1/recipes/${SEED_ID}`)
+        .put(`/v1/meals/${SEED_ID}`)
         .send(newValue)
         .expect('Content-Type', /json/)
         .expect(200)
@@ -154,7 +154,7 @@ describe('Endpoint recipes', () => {
     });
 
     test('invalid id returns error', (done) => {
-      const newValue: Recipe = {
+      const newValue: Meal = {
         name: 'Salad',
         portions: 4,
         stock: 4,
@@ -162,7 +162,7 @@ describe('Endpoint recipes', () => {
         ingredients: [{ name: 'Lettuce', qty: '6 oz' }],
       };
       request(app)
-        .put(`/v1/recipes/012345678901234567890123`)
+        .put(`/v1/meals/012345678901234567890123`)
         .send(newValue)
         .expect('Content-Type', /json/)
         .expect(404)
@@ -178,7 +178,7 @@ describe('Endpoint recipes', () => {
 
     test('invalid body returns error', (done) => {
       request(app)
-        .put(`/v1/recipes/${SEED_ID}`)
+        .put(`/v1/meals/${SEED_ID}`)
         .send({ foo: 'bar' })
         .expect('Content-Type', /json/)
         .expect(400)
@@ -190,10 +190,10 @@ describe('Endpoint recipes', () => {
     });
   });
 
-  describe('DEL /v1/recipes/:id', () => {
+  describe('DEL /v1/meals/:id', () => {
     test('valid id deletes resource', (done) => {
       request(app)
-        .delete(`/v1/recipes/${SEED_ID}`)
+        .delete(`/v1/meals/${SEED_ID}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end((err, res) => {
@@ -205,7 +205,7 @@ describe('Endpoint recipes', () => {
 
     test('invalid id returns error', (done) => {
       request(app)
-        .delete(`/v1/recipes/0123456789abba9876543210`)
+        .delete(`/v1/meals/0123456789abba9876543210`)
         .send({ foo: 'bar' })
         .expect('Content-Type', /json/)
         .expect(404)

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environment';
 
-const URL = `${environment.apiUrl}/v1/recipes`;
+const URL = `${environment.apiUrl}/v1/meals`;
 
 @Injectable({
   providedIn: 'root',
