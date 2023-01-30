@@ -1,39 +1,14 @@
-import { NextFunction, Request, Response } from 'express';
-import { MongoClient, ObjectId } from 'mongodb';
-import { AppResponse, Meal } from './types';
-
-let mongo: MongoClient;
-
-export function connectDb() {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (mongo) {
-      next();
-      return;
-    }
-
-    MongoClient.connect(process.env.MONGODB_URL).then((client) => {
-      mongo = client;
-      next();
-    });
-  };
-}
+import { NextFunction, Request } from 'express';
+import { ObjectId } from 'mongodb';
+import { AppResponse, Meal } from '../../shared';
 
 export function setCollection() {
-  return (req: Request, res: Response, next: NextFunction) => {
-    res.locals.collection = mongo
+  return (req: Request, res: AppResponse, next: NextFunction) => {
+    res.locals.collection = res.locals.mongoClient
       .db(process.env.MONGODB_DB)
       .collection<Meal>(process.env.MONGODB_COLLECTION);
     next();
   };
-}
-
-export function disconnect(): Promise<void> {
-  return new Promise<void>((resolve) => {
-    mongo.close().then(() => {
-      mongo = null;
-      resolve();
-    });
-  });
 }
 
 export function createOne() {

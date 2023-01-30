@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 
+import database from './database';
 import routes from './routes';
 import errors from './errors';
 
@@ -20,6 +21,7 @@ app.use(
   })
 );
 
+app.use(database());
 app.use('/v1', routes());
 app.use(errors());
 

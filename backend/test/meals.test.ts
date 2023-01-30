@@ -10,7 +10,8 @@ import { MongoClient, ObjectId } from 'mongodb';
 import request from 'supertest';
 
 import app from '../src/app';
-import { disconnectDb, Meal } from '../src/routes/meals';
+import { Meal } from '../src/shared';
+import { disconnect as disconnectDb } from '../src/database';
 
 const SEED_ID = '63ba13b16937d34102fe8054';
 const SEED_DATA: Partial<Meal> = {

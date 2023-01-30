@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { Collection } from 'mongodb';
+import { Collection, MongoClient } from 'mongodb';
 
 export interface Meal {
   name: string;
@@ -20,7 +20,8 @@ export interface CreateOneResult {
 
 export interface AppResponse extends Response {
   locals: {
-    collection: Collection<Meal>;
+    mongoClient: MongoClient;
+    collection?: Collection<any>;
     errorCode?: ClientErrorCode;
   };
 }

@@ -1,5 +1,5 @@
 import { NextFunction, Request } from 'express';
-import { AppResponse, ClientError } from './types';
+import { AppResponse, ClientError } from '../../shared';
 import { validate } from 'jsonschema';
 
 export function validateBody(schema: object) {

@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import {
-  connectDb,
   setCollection,
   createOne,
   getAll,
@@ -13,7 +12,7 @@ import { mealSchema } from './schemas';
 
 export const router: Router = Router();
 
-router.use([connectDb(), setCollection()]);
+router.use(setCollection());
 
 router.post('/', [validateBody(mealSchema), createOne()]);
 router.get('/', getAll());
@@ -22,6 +21,3 @@ router.put('/:id', [validateBody(mealSchema), updateOne()]);
 router.delete('/:id', [deleteOne()]);
 
 router.use(handleError());
-
-export { disconnect as disconnectDb } from './database';
-export * from './types';
