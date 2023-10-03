@@ -1,11 +1,13 @@
 <h2 mat-dialog-title>Delete?</h2>
 <mat-dialog-content class="mat-typography">
-  <p>{{ data.name | titlecase}}</p>
+  <p>{{ data.name | titlecase }}</p>
   <p>
     <i>{{ data.date | date }}</i>
   </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button color="default" [mat-dialog-close]="false">CANCEL</button>
-  <button mat-button color="primary" [mat-dialog-close]="true">DELETE</button>
+  <button mat-stroked-button [mat-dialog-close]="false">CANCEL</button>
+  <button mat-stroked-button color="primary" [mat-dialog-close]="true">
+    DELETE
+  </button>
 </mat-dialog-actions>

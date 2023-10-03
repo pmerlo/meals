@@ -1,10 +1,10 @@
 <div class="buttons">
-  <button mat-button (click)="historyVisible ? hideHistory() : showHistory()">
+  <button mat-stroked-button (click)="historyVisible ? hideHistory() : showHistory()">
     <mat-icon>{{ historyVisible ? "visibility" : "visibility_off" }}</mat-icon>
     HISTORY
   </button>
 
-  <button mat-button class="btn" (click)="changeSort()">
+  <button mat-stroked-button class="btn" (click)="changeSort()">
     <mat-icon>{{ dateAscending ? "arrow_upward" : "arrow_downward" }}</mat-icon>
     DATE
   </button>

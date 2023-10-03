@@ -1,12 +1,8 @@
 <mat-card [style]="'background-color: ' + getColor()">
   <mat-card-header>
-    <mat-card-title>{{ meal.name | titlecase }}</mat-card-title>
+    <mat-card-title>{{ meal.name | titlecase }} ({{ meal.stock }}/{{ meal.portions }})</mat-card-title>
     <mat-card-subtitle>{{ meal.date | date }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
-    <p>Stock: {{ meal.stock }} / {{ meal.portions }}</p>
-    <mat-divider></mat-divider>
-  </mat-card-content>
   <mat-card-actions>
     <button
       mat-icon-button

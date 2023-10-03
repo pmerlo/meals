@@ -1,7 +1,10 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <mat-icon class="icon">restaurant</mat-icon>
-  <button mat-button (click)="showList()">MEALS</button>
-  <button mat-button (click)="addNew()">ADD NEW</button>
+<mat-toolbar class="app-toolbar">
+  <button mat-stroked-button color="primary" class="toolbar-button" (click)="showList()">
+    <mat-icon>restaurant</mat-icon>MEALS
+  </button>
+  <button mat-stroked-button color="primary" class="toolbar-button" (click)="addNew()">
+    <mat-icon>add</mat-icon>ADD
+  </button>
   <span class="spacer"></span>
   <span class="version">{{ versionHash() }}</span>
 </mat-toolbar>

@@ -51,8 +51,8 @@ export class MealCardComponent {
 
   getColor(): string {
     const ratio = this.meal.stock / this.meal.portions;
-    if (ratio > 0.66) return '#e0ffe0';
-    if (ratio > 0.33) return '#ffffe0';
+    if (ratio > 0.5) return '#e0ffe0';
+    if (ratio > 0.25) return '#ffffe0';
     if (ratio > 0.0) return '#ffe0e0;';
     return '#fafafa';
   }

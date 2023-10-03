@@ -5,7 +5,7 @@
   z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 
-.icon {
+.toolbar-button {
   margin-right: 10px;
 }
 
@@ -20,4 +20,8 @@
 .version {
   font-weight: lighter;
   font-size: small;
+}
+
+.mat-button-focus-overlay {
+  background-color: transparent!important;
 }
