@@ -19,12 +19,6 @@ const SEED_DATA: Partial<Meal> = {
   portions: 5,
   stock: 5,
   date: new Date().toISOString(),
-  ingredients: [
-    {
-      name: 'Potato',
-      qty: '5 lb',
-    },
-  ],
 };
 
 const MONGODB_URL = 'mongodb://root:password@localhost:27017';
@@ -140,7 +134,6 @@ describe('Endpoint meals', () => {
         portions: 4,
         stock: 4,
         date: new Date().toISOString(),
-        ingredients: [{ name: 'Lettuce', qty: '6 oz' }],
       };
       request(app)
         .put(`/v1/meals/${SEED_ID}`)
@@ -160,7 +153,6 @@ describe('Endpoint meals', () => {
         portions: 4,
         stock: 4,
         date: new Date().toISOString(),
-        ingredients: [{ name: 'Lettuce', qty: '6 oz' }],
       };
       request(app)
         .put(`/v1/meals/012345678901234567890123`)

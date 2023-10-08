@@ -6,12 +6,6 @@ export interface Meal {
   portions: number;
   stock: number;
   date: string;
-  ingredients: [Ingredient];
-}
-
-export interface Ingredient {
-  name: string;
-  qty: string;
 }
 
 export interface CreateOneResult {

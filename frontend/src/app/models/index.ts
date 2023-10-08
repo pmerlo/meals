@@ -5,12 +5,6 @@ export interface Meal {
   date: string;
   modified: string;
   stock: number;
-  ingredients: Ingredient[];
-}
-
-export interface Ingredient {
-  name: string;
-  qty: string;
 }
 
 export interface DeleteResult {
