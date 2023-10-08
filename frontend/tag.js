@@ -10,8 +10,11 @@ exec("git rev-parse --short HEAD", (err, stdout, stderr) => {
 
     fs.writeFile("src/version/index.ts", content, function (err) {
       if (err) throw err;
-
       console.log(`Tagged build as '${version}'`);
+    });
+
+    fs.writeFile("src/version/version.txt", version, function (err) {
+      if (err) throw err;
     });
   });
 });
