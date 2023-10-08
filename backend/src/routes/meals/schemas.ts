@@ -1,6 +1,6 @@
 export const mealSchema = {
   type: 'object',
-  required: ['name', 'portions', 'stock', 'date', 'ingredients'],
+  required: ['name', 'portions', 'stock', 'date', 'modified', 'ingredients'],
   properties: {
     name: {
       type: 'string',
@@ -12,6 +12,9 @@ export const mealSchema = {
       type: 'number',
     },
     date: {
+      type: 'string',
+    },
+    modified: {
       type: 'string',
     },
     ingredients: {

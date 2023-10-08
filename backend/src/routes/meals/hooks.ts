@@ -32,3 +32,10 @@ export function handleError() {
     return next();
   };
 }
+
+export function insertModified() {
+  return (req: Request, res: AppResponse, next: NextFunction) => {
+    req.body.modified = new Date().toISOString();
+    return next();
+  };
+}

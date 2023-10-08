@@ -3,6 +3,7 @@ export interface Meal {
   name: string;
   portions: number;
   date: string;
+  modified: string;
   stock: number;
   ingredients: Ingredient[];
 }

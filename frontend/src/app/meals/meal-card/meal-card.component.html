@@ -10,6 +10,9 @@
     <div class="mat-h4">
       {{ meal.date | date }}
     </div>
+    <div class="mat-h5" style="font-style: italic">
+      Last modified: {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
+    </div>
   </mat-card-content>
   <mat-card-actions>
     <button

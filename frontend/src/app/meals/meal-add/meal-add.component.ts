@@ -59,6 +59,7 @@ export class MealAddComponent implements OnInit {
       portions: this.portionsFormControl.value,
       stock: this.portionsFormControl.value,
       date: this.dateFormControl.value,
+      modified: this.dateFormControl.value,
       ...this.mealForm.value,
     };
     this.add.emit(data);

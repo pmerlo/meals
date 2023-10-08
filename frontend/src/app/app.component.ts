@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
   updateMeal(meal: Meal): void {
     this.mealsService.update(meal).subscribe((value) => {
       meal.stock = value.stock;
+      meal.modified = value.modified;
     });
   }
 
