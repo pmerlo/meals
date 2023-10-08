@@ -13,10 +13,10 @@ cd $BUILD/frontend/
 npm install
 npm run clean
 npm run dist
+VERSION=$(<src/version/version.txt)
 cp -r dist/frontend/ ../../$DIST/frontend
 
 cd ../../$DIST/
-VERSION=$(<./frontend/src/version/version.txt)
 git add .
 git commit -m "push version $VERSION"
 git push origin main
