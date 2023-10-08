@@ -50,10 +50,9 @@ export class MealCardComponent {
   }
 
   getColor(): string {
-    const ratio = this.meal.stock / this.meal.portions;
-    if (ratio > 0.5) return 'green';
-    if (ratio > 0.25) return 'orange';
-    if (ratio > 0.0) return 'red;';
+    if (this.meal.stock > 5) return 'green';
+    if (this.meal.stock > 2) return 'orange';
+    if (this.meal.stock > 0) return 'red;';
     return 'gray';
   }
 }
