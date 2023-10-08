@@ -54,6 +54,6 @@ export class MealCardComponent {
     if (ratio > 0.5) return 'green';
     if (ratio > 0.25) return 'orange';
     if (ratio > 0.0) return 'red;';
-    return 'black';
+    return 'gray';
   }
 }
