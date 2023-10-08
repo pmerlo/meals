@@ -1,3 +1,5 @@
 meals-dist/
+meals-build/
 frontend/src/version/index.ts
 .vscode
+bkp/
