@@ -5,7 +5,7 @@
   remote_user: ansibler
 
   pre_tasks:
-    - name: Set LED trigger
+    - name: Red LED blink pattern
       command: sudo sh -c "echo timer > /sys/class/leds/led1/trigger"
 
   tasks:
@@ -35,5 +35,5 @@
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml up --detach
 
   post_tasks:
-    - name: Restore LED trigger
-      command: sudo sh -c "echo heartbeat > /sys/class/leds/led1/trigger"
+    - name: Red LED off
+      command: sudo sh -c "echo none > /sys/class/leds/led1/trigger"
