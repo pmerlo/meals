@@ -2,7 +2,7 @@
   <div class="container">
     <div class="left">
       <div [style]="'color: ' + getColor()">
-        <span class="mat-h2"> {{ meal.stock }}/{{ meal.portions }} {{ meal.name | titlecase }} </span>
+        <span class="mat-h2"> {{ meal.stock }}/{{ meal.portions }} {{ getName() | titlecase }} </span>
       </div>
       <div class="mat-h4">
         {{ meal.date | date }}<br>

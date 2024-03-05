@@ -55,4 +55,12 @@ export class MealCardComponent {
     if (this.meal.stock > 0) return 'red;';
     return 'gray';
   }
+
+  getName(): string {
+    const maxLength = 20;
+    if (this.meal.name.length > maxLength) {
+      return this.meal.name.slice(0, maxLength) + "...";
+    }
+    return this.meal.name;
+  }
 }
