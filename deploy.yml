@@ -41,4 +41,4 @@
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml build
 
     - name: Launch services
-      ansible.builtin.shell: sudo systemctl stop meals.service
+      ansible.builtin.shell: sudo systemctl start meals.service
