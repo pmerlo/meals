@@ -1,0 +1,14 @@
+[Unit]
+Description=meals service.
+Wants=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/bin/docker compose --file /home/ansibler/meals/docker-compose.yml up --detach
+ExecStop=/usr/bin/docker compose --file /home/ansibler/meals/docker-compose.yml stop
+TimeoutSec=60
+
+[Install]
+WantedBy=multi-user.target

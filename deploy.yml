@@ -5,8 +5,24 @@
   remote_user: ansibler
 
   tasks:
+    - name: Copy service unit
+      ansible.builtin.copy:
+        src: meals.service
+        dest: /etc/systemd/system/meals.service
+        owner: root
+        group: root
+        mode: 0644
+      register: service_unit
+    
+    - name: Reload systemd units
+      ansible.builtin.shell: sudo systemctl daemon-reload
+      when: service_unit.changed
+
     - name: Stop services
-      ansible.builtin.shell: sudo systemctl stop meals
+      ansible.builtin.service:
+        name: meals
+        enabled: true
+        state: stopped
 
     - name: Clone this repo
       ansible.builtin.git:
@@ -28,4 +44,7 @@
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml build
 
     - name: Launch services
-      ansible.builtin.shell: sudo systemctl start meals
+      ansible.builtin.service:
+        name: meals
+        enabled: true
+        state: started
