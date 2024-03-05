@@ -5,6 +5,9 @@
   remote_user: ansibler
 
   tasks:
+    - name: Set PWR LED trigger to timer
+      ansible.builtin.shell: echo timer | sudo tee /sys/devices/platform/leds/leds/PWR/trigger
+
     - name: Copy service unit
       ansible.builtin.copy:
         src: meals.service
@@ -42,3 +45,6 @@
 
     - name: Start service
       ansible.builtin.shell: sudo systemctl start meals.service
+
+    - name: Set PWR LED trigger to default-on
+      ansible.builtin.shell: echo default-on | sudo tee /sys/devices/platform/leds/leds/PWR/trigger
