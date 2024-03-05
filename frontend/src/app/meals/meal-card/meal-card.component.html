@@ -1,39 +1,23 @@
-<mat-card>
-  <mat-card-content>
-    <div [style]="'color: ' + getColor()">
-      <span class="align-left mat-h2"> {{ meal.name | titlecase }} </span>
-      <span class="align-right mat-h2">
-        {{ meal.stock }}/{{ meal.portions }}
-      </span>
+<mat-card class="card">
+  <div class="container">
+    <div class="left">
+      <div [style]="'color: ' + getColor()">
+        <span class="mat-h2"> {{ meal.stock }}/{{ meal.portions }} {{ meal.name | titlecase }} </span>
+      </div>
+      <div class="mat-h4">
+        {{ meal.date | date }}<br>
+        Modified: {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
+      </div>
     </div>
-    <div style="clear: both"></div>
-    <div class="mat-h4">
-      {{ meal.date | date }}
+    <div class="right">
+      <button mat-icon-button [disabled]="meal.stock === meal.portions" (click)="increaseStock()">
+        <mat-icon>keyboard_arrow_up</mat-icon>
+      </button>
+      <br>
+      <button  mat-icon-button [disabled]="meal.stock === 0" (click)="decreaseStock()">
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      
     </div>
-    <div class="mat-h5" style="font-style: italic">
-      Last modified: {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
-    </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button
-      mat-icon-button
-      [disabled]="meal.stock === 0"
-      (click)="decreaseStock()"
-    >
-      <mat-icon>remove</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      [disabled]="meal.stock === meal.portions"
-      (click)="increaseStock()"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-    <button mat-icon-button (click)="copyMeal()">
-      <mat-icon>content_copy</mat-icon>
-    </button>
-    <button mat-icon-button (click)="deleteMeal()">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card-actions>
+  </div>
 </mat-card>
