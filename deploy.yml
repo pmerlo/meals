@@ -4,13 +4,9 @@
   gather_facts: false
   remote_user: ansibler
 
-  pre_tasks:
-    - name: Red LED blink pattern
-      command: sudo sh -c "echo timer > /sys/class/leds/led1/trigger"
-
   tasks:
     - name: Stop services
-      ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml stop
+      ansible.builtin.shell: sudo systemctl stop meals
 
     - name: Clone this repo
       ansible.builtin.git:
@@ -32,8 +28,4 @@
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml build
 
     - name: Launch services
-      ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml up --detach
-
-  post_tasks:
-    - name: Red LED off
-      command: sudo sh -c "echo none > /sys/class/leds/led1/trigger"
+      ansible.builtin.shell: sudo systemctl start meals
