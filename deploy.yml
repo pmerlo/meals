@@ -18,7 +18,7 @@
       ansible.builtin.shell: sudo systemctl daemon-reload
       when: service_unit.changed
 
-    - name: Stop services
+    - name: Stop service
       ansible.builtin.shell: sudo systemctl stop meals.service
 
     - name: Clone this repo
@@ -40,5 +40,5 @@
     - name: Build containers
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml build
 
-    - name: Launch services
+    - name: Start service
       ansible.builtin.shell: sudo systemctl start meals.service

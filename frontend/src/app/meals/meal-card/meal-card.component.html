@@ -11,11 +11,11 @@
     </div>
     <div class="right">
       <button mat-icon-button [disabled]="meal.stock === meal.portions" (click)="increaseStock()">
-        <mat-icon>keyboard_arrow_up</mat-icon>
+        <mat-icon>add</mat-icon>
       </button>
       <br>
       <button  mat-icon-button [disabled]="meal.stock === 0" (click)="decreaseStock()">
-        <mat-icon>keyboard_arrow_down</mat-icon>
+        <mat-icon>remove</mat-icon>
       </button>
       
     </div>
