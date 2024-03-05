@@ -19,10 +19,7 @@
       when: service_unit.changed
 
     - name: Stop services
-      ansible.builtin.service:
-        name: meals
-        enabled: true
-        state: stopped
+      ansible.builtin.shell: sudo systemctl stop meals.service
 
     - name: Clone this repo
       ansible.builtin.git:
@@ -44,7 +41,4 @@
       ansible.builtin.shell: docker compose --file /home/ansibler/meals/docker-compose.yml build
 
     - name: Launch services
-      ansible.builtin.service:
-        name: meals
-        enabled: true
-        state: started
+      ansible.builtin.shell: sudo systemctl stop meals.service
