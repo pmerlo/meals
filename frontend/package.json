@@ -8,7 +8,7 @@
     "build": "ng build",
     "build-staging": "ng build --configuration staging",
     "tag": "node tag.js",
-    "build-prod": "ng build --configuration production  --base-href /app/meals/",
+    "build-prod": "ng build --configuration production --base-href /app/meals/",
     "dist": "npm run tag && npm run build-prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
