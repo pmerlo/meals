@@ -17,14 +17,14 @@ services:
     depends_on:
       - mongo
     ports:
-      - 3000:3000
+      - 4002:3000
 
   frontend:
     build: ./frontend-dist
     depends_on:
       - backend
     ports:
-      - 80:80
+      - 4001:80
 
 volumes:
   mongo_data:
