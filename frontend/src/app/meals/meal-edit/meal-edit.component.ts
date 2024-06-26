@@ -51,6 +51,7 @@ export class MealEditComponent implements OnInit {
     };
     if (this.isEditMode()) {
       data._id = this.inputMeal._id!;
+      data.date = this.inputMeal.date!;
       this.update.emit(data);
     } else {
       this.add.emit(data);
