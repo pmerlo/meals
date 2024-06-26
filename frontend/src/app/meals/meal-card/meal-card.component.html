@@ -1,23 +1,33 @@
 <mat-card class="card">
   <div class="container">
-    <div class="left">
+    <div class="left" (click)="onEdit()">
       <div [style]="'color: ' + getColor()">
-        <span class="mat-h2"> {{ meal.stock }}/{{ meal.portions }} {{ getName() | titlecase }} </span>
+        <span class="mat-h2">
+          {{ meal.stock }}/{{ meal.portions }} {{ getName() | titlecase }}
+        </span>
       </div>
       <div class="mat-h4">
-        {{ meal.date | date }}<br>
-        Modified: {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
+        {{ meal.date | date }}<br />
+        Modified:
+        {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
       </div>
     </div>
     <div class="right">
-      <button mat-icon-button [disabled]="meal.stock === meal.portions" (click)="increaseStock()">
+      <button
+        mat-icon-button
+        [disabled]="meal.stock === meal.portions"
+        (click)="increaseStock()"
+      >
         <mat-icon>add</mat-icon>
       </button>
-      <br>
-      <button  mat-icon-button [disabled]="meal.stock === 0" (click)="decreaseStock()">
+      <br />
+      <button
+        mat-icon-button
+        [disabled]="meal.stock === 0"
+        (click)="decreaseStock()"
+      >
         <mat-icon>remove</mat-icon>
       </button>
-      
     </div>
   </div>
 </mat-card>

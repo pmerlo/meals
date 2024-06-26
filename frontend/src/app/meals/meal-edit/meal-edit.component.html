@@ -22,9 +22,14 @@
 
 <form [formGroup]="mealForm">
   <div class="btn-container-right">
-    <button mat-stroked-button color="default" class="btn" (click)="onReset()">
-      RESET
+    <button mat-stroked-button color="default" class="btn" (click)="onCancel()">
+      CANCEL
     </button>
+    <div *ngIf="isEditMode()">
+      <button mat-stroked-button color="warn" class="btn" (click)="onDelete()">
+        DELETE
+      </button>
+    </div>
     <button
       mat-stroked-button
       color="primary"
@@ -32,7 +37,7 @@
       [disabled]="!isFormValid()"
       (click)="onSubmit()"
     >
-      SUBMIT
+      {{ isEditMode() ? "UPDATE" : "ADD" }}
     </button>
   </div>
 </form>

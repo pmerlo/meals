@@ -45,20 +45,24 @@ export class AppComponent implements OnInit {
 
   updateMeal(meal: Meal): void {
     this.mealsService.update(meal).subscribe((value) => {
+      meal.portions = value.portions;
       meal.stock = value.stock;
       meal.modified = value.modified;
+      this.showList();
     });
   }
 
-  copyExisting(meal: Meal): void {
+  deleteMeal(id: string): void {
+    this.mealsService.delete(id).subscribe(() => this.showList());
+  }
+
+  editMeal(meal: Meal): void {
     this.inputMeal = meal;
     this.showForm();
   }
 
-  deleteMeal(meal: Meal): void {
-    this.mealsService.delete(meal._id).subscribe(() => {
-      this.ngOnInit();
-    });
+  onCancel(): void {
+    this.showList();
   }
 
   versionHash(): string {

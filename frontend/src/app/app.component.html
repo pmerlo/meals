@@ -10,10 +10,13 @@
 </mat-toolbar>
 <div *ngIf="displayForm">
   <div class="container">
-    <app-meal-add
+    <app-meal-edit
       [inputMeal]="inputMeal"
       (add)="addMeal($event)"
-    ></app-meal-add>
+      (update)="updateMeal($event)"
+      (delete)="deleteMeal($event)"
+      (cancel)="onCancel()"
+    ></app-meal-edit>
   </div>
 </div>
 <div *ngIf="displayList">
@@ -23,7 +26,7 @@
         *ngIf="meals.length > 0; else nodata"
         [meals]="meals"
         (stockChange)="updateMeal($event)"
-        (copy)="copyExisting($event)"
+        (edit)="editMeal($event)"
         (delete)="deleteMeal($event)"
       ></app-meal-list>
     </div>

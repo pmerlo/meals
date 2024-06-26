@@ -9,8 +9,8 @@ import { Meal } from 'src/app/models';
 export class MealListComponent implements OnInit {
   @Input() meals: Meal[] = [];
   @Output() stockChange = new EventEmitter<Meal>();
-  @Output() copy = new EventEmitter<Meal>();
-  @Output() delete = new EventEmitter<Meal>();
+  @Output() edit = new EventEmitter<Meal>();
+  @Output() delete = new EventEmitter<string>();
 
   visibleMeals: Meal[] = [];
   historyVisible = false;
@@ -40,12 +40,12 @@ export class MealListComponent implements OnInit {
     this.stockChange.emit(meal);
   }
 
-  copyMeal(meal: Meal): void {
-    this.copy.emit(meal);
+  editMeal(meal: Meal): void {
+    this.edit.emit(meal);
   }
 
-  deleteMeal(meal: Meal): void {
-    this.delete.emit(meal);
+  deleteMeal(id: string): void {
+    this.delete.emit(id);
   }
 
   private refreshList(): void {

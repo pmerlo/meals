@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -9,11 +8,11 @@ import {
 import { Meal } from 'src/app/models';
 
 @Component({
-  selector: 'app-meal-add',
-  templateUrl: './meal-add.component.html',
-  styleUrls: ['./meal-add.component.scss'],
+  selector: 'app-meal-edit',
+  templateUrl: './meal-edit.component.html',
+  styleUrls: ['./meal-edit.component.scss'],
 })
-export class MealAddComponent implements OnInit {
+export class MealEditComponent implements OnInit {
   nameFormControl = new FormControl<string>('', Validators.required);
   portionsFormControl = new FormControl<number>(0, Validators.required);
   dateFormControl = new FormControl<Date>(new Date(), Validators.required);
@@ -21,15 +20,24 @@ export class MealAddComponent implements OnInit {
 
   @Input() inputMeal: Partial<Meal> = {};
   @Output() add = new EventEmitter<Partial<Meal>>();
+  @Output() update = new EventEmitter<Meal>();
+  @Output() delete = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) {
-    this.onReset();
     this.mealForm = this.formBuilder.group({});
   }
 
   ngOnInit(): void {
     const name = this.inputMeal.name ? this.inputMeal.name : '';
     this.nameFormControl.setValue(name);
+
+    const portions = this.inputMeal.portions ? this.inputMeal.portions : 0;
+    this.portionsFormControl.setValue(portions);
+  }
+
+  isEditMode(): boolean {
+    return '_id' in this.inputMeal;
   }
 
   onSubmit(): void {
@@ -41,14 +49,20 @@ export class MealAddComponent implements OnInit {
       modified: this.dateFormControl.value,
       ...this.mealForm.value,
     };
-    this.add.emit(data);
+    if (this.isEditMode()) {
+      data._id = this.inputMeal._id!;
+      this.update.emit(data);
+    } else {
+      this.add.emit(data);
+    }
   }
 
-  onReset(): void {
-    this.nameFormControl.setValue(null);
-    this.portionsFormControl.setValue(null);
-    this.dateFormControl.setValue(new Date());
-    this.mealForm = this.formBuilder.group({});
+  onCancel(): void {
+    this.cancel.emit();
+  }
+
+  onDelete(): void {
+    this.delete.emit(this.inputMeal._id!);
   }
 
   isFormValid(): boolean {
