@@ -34,6 +34,9 @@ export class MealEditComponent implements OnInit {
 
     const portions = this.inputMeal.portions ? this.inputMeal.portions : 0;
     this.portionsFormControl.setValue(portions);
+
+    const date = this.inputMeal.date ? this.inputMeal.date : new Date();
+    this.dateFormControl.setValue(new Date(date));
   }
 
   isEditMode(): boolean {
@@ -51,7 +54,6 @@ export class MealEditComponent implements OnInit {
     };
     if (this.isEditMode()) {
       data._id = this.inputMeal._id!;
-      data.date = this.inputMeal.date!;
       this.update.emit(data);
     } else {
       this.add.emit(data);
