@@ -10,7 +10,6 @@ export class MealListComponent implements OnInit {
   @Input() meals: Meal[] = [];
   @Output() stockChange = new EventEmitter<Meal>();
   @Output() edit = new EventEmitter<Meal>();
-  @Output() delete = new EventEmitter<string>();
 
   visibleMeals: Meal[] = [];
   historyVisible = false;
@@ -42,10 +41,6 @@ export class MealListComponent implements OnInit {
 
   editMeal(meal: Meal): void {
     this.edit.emit(meal);
-  }
-
-  deleteMeal(id: string): void {
-    this.delete.emit(id);
   }
 
   private refreshList(): void {
