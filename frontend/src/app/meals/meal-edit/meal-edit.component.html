@@ -23,11 +23,11 @@
 <form [formGroup]="mealForm">
   <div class="btn-container-right">
     <button mat-stroked-button color="default" class="btn" (click)="onCancel()">
-      CANCEL
+      <mat-icon>close</mat-icon>CANCEL
     </button>
     <div *ngIf="isEditMode()">
       <button mat-stroked-button color="warn" class="btn" (click)="onDelete()">
-        DELETE
+        <mat-icon>delete</mat-icon>DELETE
       </button>
     </div>
     <button
@@ -37,7 +37,7 @@
       [disabled]="!isFormValid()"
       (click)="onSubmit()"
     >
-      {{ isEditMode() ? "UPDATE" : "ADD" }}
+      <mat-icon>{{ isEditMode() ? "save" : "add" }}</mat-icon>{{ isEditMode() ? "SAVE" : "ADD" }}
     </button>
   </div>
 </form>
