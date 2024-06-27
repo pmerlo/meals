@@ -1,19 +1,14 @@
 .full-width {
-  width: 100%;
-}
-
-.btn-container-left {
-  display: flex;
-  justify-content: flex-start;
-  flex-grow: 1;
+  margin: 0px 10px 0px 10px;
+  width: calc(100% - 20px);
 }
 
 .btn-container-right {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   flex-grow: 1;
 }
 
 .btn {
-  margin-left: 10px;
+  margin: 0px 10px 0px 0px;
 }
