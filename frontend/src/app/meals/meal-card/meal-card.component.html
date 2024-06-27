@@ -7,9 +7,9 @@
         </span>
       </div>
       <div class="mat-h4">
-        {{ meal.date | date }}<br />
+        {{ meal.date | date: "shortDate" }}<br />
         Changed:
-        {{ meal.modified ? (meal.modified | date : "medium") : "N/A" }}
+        {{ meal.modified ? (meal.modified | date : "short") : "N/A" }}
       </div>
     </div>
     <div class="right">
